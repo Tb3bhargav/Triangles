@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Triangles - Launcher</title>
+<HTA:APPLICATION ID="Triangles" APPLICATIONNAME="Triangles Launcher" BORDER="thin" CAPTION="yes" SHOWINTASKBAR="yes" SINGLEINSTANCE="yes" SYSMENU="yes" WINDOWSTATE="normal" SCROLL="no" />
+<style>
+body { font-family: Segoe UI, Arial, sans-serif; background: #151618; color: #fff; margin: 0; padding: 24px; }
+.card { max-width: 520px; margin: 0 auto; background: #1e1f24; border: 1px solid #555; border-radius: 12px; padding: 24px; }
+h1 { font-size: 22px; margin: 0 0 6px 0; }
+p { font-size: 13px; color: #bbb; }
+button { display: block; width: 100%; margin: 8px 0; padding: 12px; font-size: 14px; font-weight: bold; color: #fff; background: #c86400; border: none; border-radius: 8px; cursor: pointer; }
+button.ghost { background: transparent; border: 1px solid #c86400; }
+button:hover { filter: brightness(1.15); }
+.small { font-size: 11px; color: #888; margin-top: 12px; }
+</style>
+<script language="VBScript">
+Function HtaDir()
+  Dim path
+  path = Mid(document.location.href, 9)
+  path = Replace(path, "/", "\")
+  path = Unescape(path)
+  HtaDir = Left(path, InStrRev(path, "\"))
+End Function
+
+Sub OpenMain()
+  Dim sh
+  Set sh = CreateObject("WScript.Shell")
+  sh.Run Chr(34) & HtaDir() & "triangle.html" & Chr(34), 1, False
+  Set sh = Nothing
+End Sub
+
+Sub OpenFolder()
+  Dim sh
+  Set sh = CreateObject("WScript.Shell")
+  sh.Run Chr(34) & "explorer.exe" & Chr(34) & " " & Chr(34) & HtaDir() & Chr(34), 1, False
+  Set sh = Nothing
+End Sub
+</script>
+</head>
+<body>
+<div class="card">
+<h1>Triangles &amp; Light</h1>
+<p>Lively Wallpaper: triangle pattern generator with a light that follows your cursor (and hand tracking). Lively properties (mesh/light color, slices, distance) still work via LivelyProperties.json.</p>
+<button onclick="OpenMain">Open Main File (triangle.html)</button>
+<button class="ghost" onclick="OpenFolder">Open Folder (add this folder in Lively Wallpaper)</button>
+<p class="small">Tip: in Lively, choose "Add Wallpaper" and pick this folder (FileName: triangle.html). Keys: Space = pick up light, Enter = add light, H = hide controls. Webcam hand tracking needs internet (MediaPipe CDN).</p>
+</div>
+</body>
+</html>
